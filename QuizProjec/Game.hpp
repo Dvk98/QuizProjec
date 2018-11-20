@@ -1,14 +1,11 @@
 #ifndef BOOK_GAME_HPP
 #define BOOK_GAME_HPP
 
-#include "World.hpp"
-
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-
+#include <SFML/Graphics.hpp>
+#include "GameMap.hpp"
 
 class Game : private sf::NonCopyable
 {
@@ -24,13 +21,14 @@ class Game : private sf::NonCopyable
 
 		void					updateStatistics(sf::Time elapsedTime);	
 		void					handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-		
+		void					load();
 
 	private:
 		static const sf::Time	TimePerFrame;
 
 		sf::RenderWindow		mWindow;
-		World					mWorld;
+		sf::Texture				mMap;
+		GameMap					mGameMap;
 
 	  	sf::Font				mFont;
 		sf::Text				mStatisticsText;

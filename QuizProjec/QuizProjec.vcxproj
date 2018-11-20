@@ -20,16 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="Map.hpp" />
+    <ClInclude Include="GameMap.hpp" />
     <ClInclude Include="StringHelpers.hpp" />
-    <ClInclude Include="World.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StringHelpers.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SFML\include;C:\Libs\imgui;C:\Libs\imgui-sfml</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

@@ -21,10 +21,7 @@
     <ClInclude Include="StringHelpers.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="World.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.hpp">
+    <ClInclude Include="GameMap.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,7 +34,10 @@
     <ClCompile Include="Game.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
