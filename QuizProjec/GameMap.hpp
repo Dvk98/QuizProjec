@@ -9,6 +9,7 @@ public:
 	void setTexture(sf::Texture& texture);
 	void setScale(float x, float y);
 	void setPosition(float x, float y);
+	sf::Vector2f getSize();
 
 
 private:

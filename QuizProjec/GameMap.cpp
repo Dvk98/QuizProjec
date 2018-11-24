@@ -28,7 +28,12 @@ void GameMap::setPosition(float x, float y)
 	std::cout << mSprite.getOrigin().x << " " << mSprite.getOrigin().y << std::endl;
 	auto bounds = mSprite.getGlobalBounds();
 	std::cout << bounds.width << " " << bounds.height << std::endl;
-	mSprite.setOrigin(bounds.width/2, bounds.height/2);
+	mSprite.setOrigin(bounds.width/2.0f, bounds.height/2.0f);
 	std::cout << mSprite.getOrigin().x << " " << mSprite.getOrigin().y << std::endl;
 	mSprite.setPosition(x, y);
+}
+
+sf::Vector2f GameMap::getSize()
+{
+	return sf::Vector2f(mSprite.getGlobalBounds().width, mSprite.getGlobalBounds().height);
 }
