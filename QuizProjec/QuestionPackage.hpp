@@ -1,13 +1,15 @@
 #pragma once
 
 #include <vector>
+#include <fstream>
+#include <string>
 #include "Question.hpp"
 
 class QuestionPackage {
 
 public:
-	QuestionPackage();
-	void load();
+	QuestionPackage(std::string name);
+	void load(std::string path);
 	void setActive();
 	void setInactive();
 	bool getState();

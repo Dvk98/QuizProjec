@@ -4,6 +4,10 @@
 #include <SFML/Window/Event.hpp>
 #include <string>
 #include "Utils.hpp"
+#include "TGUI/TGUI.hpp"
+#include "MenuState.hpp"
+#include "LobbyState.hpp"
+#include "PlayingState.hpp"
 
 using namespace std::string_literals;
 
@@ -11,16 +15,33 @@ using namespace std::string_literals;
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
 Game::Game()
-: mWindow(sf::VideoMode(2044, 1730), "World", sf::Style::Close)
+: mWindow(sf::VideoMode(800, 600), "World", sf::Style::Close)
 , mFont()
 , mStatisticsText()
 , mStatisticsUpdateTime()
 , mStatisticsNumFrames(0)
 {
+
 	mFont.loadFromFile("Assets/arial.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+
+	mQuestionPackageManager.load();
+
+	mGameStates[static_cast<std::size_t>(GameState::State::Menu)] = new MenuState(this);
+	mGameStates[static_cast<std::size_t>(GameState::State::Lobby)] = new LobbyState(this);
+	mGameStates[static_cast<std::size_t>(GameState::State::Playing)] = new PlayingState(this);
+
+	changeGameState(GameState::State::Menu);
+}
+
+Game::~Game()
+{
+	for (GameState* gameState : mGameStates)
+	{
+		delete gameState;
+	}
 }
 
 void Game::run()
@@ -28,7 +49,6 @@ void Game::run()
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	load();
-	sf::Sprite globMap(mMap);
 	while (mWindow.isOpen())
 	{
 		sf::Time elapsedTime = clock.restart();
@@ -51,34 +71,20 @@ void Game::processEvents()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
-		switch (event.type)
-		{
-			case sf::Event::KeyPressed:
-				handlePlayerInput(event.key.code, true);
-				break;
-
-			case sf::Event::KeyReleased:
-				handlePlayerInput(event.key.code, false);
-				break;
-
-			case sf::Event::Closed:
-				mWindow.close();
-				break;
-		}
+		m_currentState->processInput(event);
 	}
 }
 
 void Game::update(sf::Time elapsedTime)
 {
-	//mWorld.update(elapsedTime);
+	m_currentState->update(elapsedTime);
 }
 
 void Game::render()
 {
-	//std::cout << "Delta X " << (mWindow.getSize().x - mGameMap.getSize().x) / 2.0f << "|" << "Delta Y " << (mWindow.getSize().y - mGameMap.getSize().y) / 2 << std::endl;
 	mWindow.clear();
-	mWindow.draw(mGameMap);
-
+	mWindow.draw(*m_currentState);
+	m_currentState->drawGui();
 	mWindow.setView(mWindow.getDefaultView());
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
@@ -101,18 +107,22 @@ void Game::updateStatistics(sf::Time elapsedTime)
 	}
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key, bool)
-{
-}
-
 void Game::load()
 {
-	if (!mMap.loadFromFile("Assets/Map_Bereinigt.png"))
-	{
-		std::cout << ("Failed to Load map.png");
-	}
-	mGameMap.setTexture(mMap);
-	mGameMap.setPosition(mWindow.getSize().x / 2, mWindow.getSize().y / 2);
-	//mGameMap.setScale(0.25f, 0.25f);
-	std::cout << mWindow.getSize().x / 2 << " " << mWindow.getSize().y / 2;
+
+}
+
+void Game::changeGameState(GameState::State gameState)
+{
+	m_currentState = mGameStates[static_cast<std::size_t>(gameState)];
+}
+
+sf::RenderWindow& Game::getWindow()
+{
+	return mWindow;
+}
+
+QuestionPackageManager Game::getQPM()
+{
+	return mQuestionPackageManager;
 }

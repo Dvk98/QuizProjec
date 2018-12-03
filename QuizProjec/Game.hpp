@@ -1,18 +1,24 @@
-#ifndef BOOK_GAME_HPP
-#define BOOK_GAME_HPP
-
+#pragma once
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
-#include "GameMap.hpp"
+#include "GameState.hpp"
+#include <array>
+#include "QuestionPackageManager.hpp"
 
 class Game : private sf::NonCopyable
 {
 	public:
 								Game();
+								~Game();
+
 		void					run();
-		
+
+		sf::RenderWindow& getWindow();
+		void changeGameState(GameState::State gameState);
+
+		QuestionPackageManager getQPM();
 
 	private:
 		void					processEvents();
@@ -20,15 +26,17 @@ class Game : private sf::NonCopyable
 		void					render();
 
 		void					updateStatistics(sf::Time elapsedTime);	
-		void					handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 		void					load();
 
 	private:
 		static const sf::Time	TimePerFrame;
 
 		sf::RenderWindow		mWindow;
-		sf::Texture				mMap;
-		GameMap					mGameMap;
+		QuestionPackageManager mQuestionPackageManager;
+
+		GameState* m_currentState{nullptr};
+
+		std::array<GameState*, static_cast<std::size_t>(GameState::State::Count)> mGameStates;
 
 	  	sf::Font				mFont;
 		sf::Text				mStatisticsText;
@@ -36,4 +44,3 @@ class Game : private sf::NonCopyable
 		std::size_t				mStatisticsNumFrames;
 };
 
-#endif // BOOK_GAME_HPP

@@ -19,3 +19,7 @@ sf::Vector2f Question::getDestination()
 	return sf::Vector2f(mLat, mLon);
 }
 
+std::string Question::getQuestion()
+{
+	return mQuestion;
+}

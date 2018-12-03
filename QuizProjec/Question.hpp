@@ -7,6 +7,7 @@ public:
 	Question(std::string question, std::string answer, float lat, float lon);
 	std::string getAnswer();
 	sf::Vector2f getDestination();
+	std::string getQuestion();
 
 
 private:
