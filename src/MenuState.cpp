@@ -2,7 +2,7 @@
 
 MenuState::MenuState(Game* game) : GameState(game), gui(game->getWindow())
 {
-    tgui::Theme theme{"Assets/Black.txt"};
+    tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
     auto wide   = game->getWindow().getSize().x;
     auto height = game->getWindow().getSize().y;

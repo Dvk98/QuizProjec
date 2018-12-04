@@ -13,19 +13,20 @@ using namespace std::string_literals;
 
 const sf::Time Game::sTimePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game()
-    : mWindow(sf::VideoMode(800, 600), "World", sf::Style::Close)
+Game::Game(const std::filesystem::path& rootPath)
+    : rootPath(rootPath)
+    , mWindow(sf::VideoMode(800, 600), "World", sf::Style::Close)
     , mFont()
     , mStatisticsText()
     , mStatisticsUpdateTime()
     , mStatisticsNumFrames(0)
 {
-    mFont.loadFromFile("Assets/arial.ttf");
+    mFont.loadFromFile((rootPath / "Assets" / "arial.ttf").string());
     mStatisticsText.setFont(mFont);
     mStatisticsText.setPosition(5.f, 5.f);
     mStatisticsText.setCharacterSize(10);
 
-    mQuestionPackageManager.load();
+    mQuestionPackageManager.load(rootPath);
 
     mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
         new MenuState(this);

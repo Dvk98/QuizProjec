@@ -8,14 +8,12 @@ namespace fs = std::filesystem;
 
 QuestionPackageManager::QuestionPackageManager() {}
 
-void QuestionPackageManager::load()
+void QuestionPackageManager::load(const std::filesystem::path& rootPath)
 {
-    std::string path = "Assets/Questions";
-
-    for (const auto& p : fs::directory_iterator(path)) {
-        QuestionPackage questionPackage(p.path().filename().string());
-        questionPackage.load(p.path().string());
-        mQuestionPackages.emplace_back(questionPackage);
+    for (const auto& p :
+         fs::directory_iterator(rootPath / "Assets" / "Questions")) {
+        mQuestionPackages.emplace_back(p.path().string())
+            .load(p.path().string());
     }
 }
 

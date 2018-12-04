@@ -3,10 +3,10 @@
 #include <iostream>
 #include <stdexcept>
 
-int main()
+int main(int argc, char** argv)
 {
     try {
-        Game game;
+        Game game{std::filesystem::path{argv[0]}.remove_filename()};
         game.run();
     }
     catch (std::exception& e) {

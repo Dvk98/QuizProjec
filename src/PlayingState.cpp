@@ -3,16 +3,17 @@
 
 PlayingState::PlayingState(Game* game) : GameState(game), gui(game->getWindow())
 {
-    tgui::Theme theme{"Assets/Black.txt"};
+    tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
-    auto wide   = game->getWindow().getSize().x;
-    auto height = game->getWindow().getSize().y;
+    const auto width  = game->getWindow().getSize().x;
+    const auto height = game->getWindow().getSize().y;
 
-    if (!texture.loadFromFile("Assets/Map_Bereinigt.png")) {
-        std::cout << ("Failed to Load map.png");
+    if (!texture.loadFromFile(
+            (game->rootPath / "Assets" / "Map_Bereinigt.png").string())) {
+        std::cout << "Failed to Load map.png";
     }
     mMap.setTexture(texture);
-    mMap.setPosition(wide / 2, height / 2);
+    mMap.setPosition(width / 2, height / 2);
     // mGameMap.setScale(0.25f, 0.25f);
 }
 

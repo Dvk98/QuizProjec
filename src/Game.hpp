@@ -4,13 +4,14 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <array>
+#include <filesystem>
 #include "GameState.hpp"
 #include "QuestionPackageManager.hpp"
 
 class Game : private sf::NonCopyable
 {
 public:
-    Game();
+    explicit Game(const std::filesystem::path&rootPath);
 
     ~Game();
 
@@ -21,6 +22,9 @@ public:
     void changeGameState(GameState::EState gameState);
 
     QuestionPackageManager getQPM();
+
+	const std::filesystem::path rootPath;
+
 
 private:
     void processEvents();

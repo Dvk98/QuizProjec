@@ -5,8 +5,9 @@
 class QuestionPackageManager
 {
 public:
-	QuestionPackageManager();
-	void load();
+    QuestionPackageManager();
+
+    void load(const std::filesystem::path& rootPath);
 
 	std::vector<QuestionPackage> getQPs();
 
