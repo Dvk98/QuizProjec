@@ -1,46 +1,49 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics.hpp>
-#include "GameState.hpp"
 #include <array>
+#include "GameState.hpp"
 #include "QuestionPackageManager.hpp"
 
 class Game : private sf::NonCopyable
 {
-	public:
-								Game();
-								~Game();
+public:
+    Game();
 
-		void					run();
+    ~Game();
 
-		sf::RenderWindow& getWindow();
-		void changeGameState(GameState::State gameState);
+    void run();
 
-		QuestionPackageManager getQPM();
+    sf::RenderWindow& getWindow();
 
-	private:
-		void					processEvents();
-		void					update(sf::Time elapsedTime);
-		void					render();
+    void changeGameState(GameState::EState gameState);
 
-		void					updateStatistics(sf::Time elapsedTime);	
-		void					load();
+    QuestionPackageManager getQPM();
 
-	private:
-		static const sf::Time	TimePerFrame;
+private:
+    void processEvents();
 
-		sf::RenderWindow		mWindow;
-		QuestionPackageManager mQuestionPackageManager;
+    void update(sf::Time elapsedTime);
 
-		GameState* m_currentState{nullptr};
+    void render();
 
-		std::array<GameState*, static_cast<std::size_t>(GameState::State::Count)> mGameStates;
+    void updateStatistics(sf::Time elapsedTime);
 
-	  	sf::Font				mFont;
-		sf::Text				mStatisticsText;
-		sf::Time				mStatisticsUpdateTime;
-		std::size_t				mStatisticsNumFrames;
+    void load();
+
+    static const sf::Time sTimePerFrame;
+
+    sf::RenderWindow mWindow;
+    QuestionPackageManager mQuestionPackageManager;
+    GameState* mCurrentState{nullptr};
+
+    std::array<GameState*, static_cast<std::size_t>(GameState::EState::Count)>
+        mGameStates;
+
+    sf::Font    mFont;
+    sf::Text    mStatisticsText;
+    sf::Time    mStatisticsUpdateTime;
+    std::size_t mStatisticsNumFrames;
 };
-

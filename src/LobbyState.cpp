@@ -33,8 +33,9 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->getWindow())
     auto bStart = tgui::Button::create();
     bStart->setRenderer(theme.getRenderer("Button"));
     bStart->setText("Start");
-    bStart->connect(
-        "pressed", [=]() { game->changeGameState(GameState::State::Playing); });
+    bStart->connect("pressed", [=]() {
+        game->changeGameState(GameState::EState::Playing);
+    });
     bottomLayout->add(bStart, "Start");
 
     auto bInvite = tgui::Button::create();
@@ -47,7 +48,7 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->getWindow())
     bBack->setRenderer(theme.getRenderer("Button"));
     bBack->setText("Back");
     bBack->connect(
-        "pressed", [=]() { game->changeGameState(GameState::State::Menu); });
+        "pressed", [=]() { game->changeGameState(GameState::EState::Menu); });
     bottomLayout->add(bBack, "Back");
 }
 

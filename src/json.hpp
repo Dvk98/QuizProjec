@@ -3282,7 +3282,7 @@ class lexer
     The function is realized with a deterministic finite state machine derived
     from the grammar described in RFC 7159. Starting in state "init", the
     input is read and used to determined the next state. Only state "done"
-    accepts the number. State "error" is a trap state to model errors. In the
+    accepts the number. EState "error" is a trap state to model errors. In the
     table below, "anything" means any character but the ones listed before.
 
     state    | 0        | 1-9      | e E      | +       | -       | .        | anything
@@ -11426,7 +11426,7 @@ class serializer
 
     The function checks each byte of a string whether it is UTF-8 encoded. The
     result of the check is stored in the @a state parameter. The function must
-    be called initially with state 0 (accept). State 1 means the string must
+    be called initially with state 0 (accept). EState 1 means the string must
     be rejected, because the current byte is not allowed. If the string is
     completely processed, but the state is non-zero, the string ended
     prematurely; that is, the last byte indicated more bytes should have

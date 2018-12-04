@@ -16,7 +16,7 @@ MenuState::MenuState(Game* game) : GameState(game), gui(game->getWindow())
     bMultiplayer->setRenderer(theme.getRenderer("Button"));
     bMultiplayer->setText("Multiplayer");
     bMultiplayer->connect(
-        "pressed", [=]() { game->changeGameState(GameState::State::Lobby); });
+        "pressed", [=]() { game->changeGameState(GameState::EState::Lobby); });
     layout->add(bMultiplayer);
 
     layout->addSpace(0.6f);

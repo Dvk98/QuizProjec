@@ -11,7 +11,7 @@
 
 using namespace std::string_literals;
 
-const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
+const sf::Time Game::sTimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
     : mWindow(sf::VideoMode(800, 600), "World", sf::Style::Close)
@@ -27,14 +27,14 @@ Game::Game()
 
     mQuestionPackageManager.load();
 
-    mGameStates[static_cast<std::size_t>(GameState::State::Menu)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
         new MenuState(this);
-    mGameStates[static_cast<std::size_t>(GameState::State::Lobby)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::Lobby)] =
         new LobbyState(this);
-    mGameStates[static_cast<std::size_t>(GameState::State::Playing)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::Playing)] =
         new PlayingState(this);
 
-    changeGameState(GameState::State::Menu);
+    changeGameState(GameState::EState::Menu);
 }
 
 Game::~Game()
@@ -52,11 +52,11 @@ void Game::run()
     while (mWindow.isOpen()) {
         sf::Time elapsedTime = clock.restart();
         timeSinceLastUpdate += elapsedTime;
-        while (timeSinceLastUpdate > TimePerFrame) {
-            timeSinceLastUpdate -= TimePerFrame;
+        while (timeSinceLastUpdate > sTimePerFrame) {
+            timeSinceLastUpdate -= sTimePerFrame;
 
             processEvents();
-            update(TimePerFrame);
+            update(sTimePerFrame);
         }
 
         updateStatistics(elapsedTime);
@@ -68,20 +68,20 @@ void Game::processEvents()
 {
     sf::Event event;
     while (mWindow.pollEvent(event)) {
-        m_currentState->processInput(event);
+        mCurrentState->processInput(event);
     }
 }
 
 void Game::update(sf::Time elapsedTime)
 {
-    m_currentState->update(elapsedTime);
+    mCurrentState->update(elapsedTime);
 }
 
 void Game::render()
 {
     mWindow.clear();
-    mWindow.draw(*m_currentState);
-    m_currentState->drawGui();
+    mWindow.draw(*mCurrentState);
+    mCurrentState->drawGui();
     mWindow.setView(mWindow.getDefaultView());
     mWindow.draw(mStatisticsText);
     mWindow.display();
@@ -108,9 +108,9 @@ void Game::updateStatistics(sf::Time elapsedTime)
 
 void Game::load() {}
 
-void Game::changeGameState(GameState::State gameState)
+void Game::changeGameState(GameState::EState gameState)
 {
-    m_currentState = mGameStates[static_cast<std::size_t>(gameState)];
+    mCurrentState = mGameStates[static_cast<std::size_t>(gameState)];
 }
 
 sf::RenderWindow& Game::getWindow()

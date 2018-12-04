@@ -8,7 +8,7 @@ class GameState : public sf::Drawable
 {
 public:
 	
-	enum class State
+	enum class EState
 	{
 		Title,
 		Menu,
