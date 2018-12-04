@@ -11,20 +11,17 @@
 class Game : private sf::NonCopyable
 {
 public:
-    explicit Game(const std::filesystem::path&rootPath);
+    explicit Game(const std::filesystem::path& rootPath);
 
     ~Game();
 
     void run();
 
-    sf::RenderWindow& getWindow();
-
     void changeGameState(GameState::EState gameState);
 
-    QuestionPackageManager getQPM();
-
-	const std::filesystem::path rootPath;
-
+    const std::filesystem::path rootPath;
+    QuestionPackageManager      questionPackageManager;
+    sf::RenderWindow            window;
 
 private:
     void processEvents();
@@ -39,8 +36,6 @@ private:
 
     static const sf::Time sTimePerFrame;
 
-    sf::RenderWindow mWindow;
-    QuestionPackageManager mQuestionPackageManager;
     GameState* mCurrentState{nullptr};
 
     std::array<GameState*, static_cast<std::size_t>(GameState::EState::Count)>

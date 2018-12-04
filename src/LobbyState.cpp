@@ -1,12 +1,12 @@
 #include "LobbyState.hpp"
 #include <iostream>
 
-LobbyState::LobbyState(Game* game) : GameState(game), gui(game->getWindow())
+LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
 {
     tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
-    auto wide   = game->getWindow().getSize().x;
-    auto height = game->getWindow().getSize().y;
+    auto wide   = game->window.getSize().x;
+    auto height = game->window.getSize().y;
 
     auto panel = tgui::ScrollablePanel::create();
     panel->setRenderer((theme.getRenderer("Panel")));
@@ -15,7 +15,7 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->getWindow())
     gui.add(panel, "PackageSelectPanel");
 
     int position = 0;
-    for (auto qp : game->getQPM().getQPs()) {
+    for (auto qp : game->questionPackageManager.getQPs()) {
         auto checkbox = tgui::CheckBox::create();
         checkbox->setRenderer(theme.getRenderer("Checkbox"));
         checkbox->setText(qp.getName());

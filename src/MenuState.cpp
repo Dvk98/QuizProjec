@@ -1,11 +1,11 @@
 #include "MenuState.hpp"
 
-MenuState::MenuState(Game* game) : GameState(game), gui(game->getWindow())
+MenuState::MenuState(Game* game) : GameState(game), gui(game->window)
 {
     tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
-    auto wide   = game->getWindow().getSize().x;
-    auto height = game->getWindow().getSize().y;
+    auto wide   = game->window.getSize().x;
+    auto height = game->window.getSize().y;
 
     auto layout = tgui::VerticalLayout::create();
     layout->setSize("25%", "75%");

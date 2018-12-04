@@ -15,7 +15,7 @@ const sf::Time Game::sTimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game(const std::filesystem::path& rootPath)
     : rootPath(rootPath)
-    , mWindow(sf::VideoMode(800, 600), "World", sf::Style::Close)
+    , window(sf::VideoMode(800, 600), "World", sf::Style::Close)
     , mFont()
     , mStatisticsText()
     , mStatisticsUpdateTime()
@@ -26,7 +26,7 @@ Game::Game(const std::filesystem::path& rootPath)
     mStatisticsText.setPosition(5.f, 5.f);
     mStatisticsText.setCharacterSize(10);
 
-    mQuestionPackageManager.load(rootPath);
+    questionPackageManager.load(rootPath);
 
     mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
         new MenuState(this);
@@ -50,7 +50,7 @@ void Game::run()
     sf::Clock clock;
     sf::Time  timeSinceLastUpdate = sf::Time::Zero;
     load();
-    while (mWindow.isOpen()) {
+    while (window.isOpen()) {
         sf::Time elapsedTime = clock.restart();
         timeSinceLastUpdate += elapsedTime;
         while (timeSinceLastUpdate > sTimePerFrame) {
@@ -68,7 +68,7 @@ void Game::run()
 void Game::processEvents()
 {
     sf::Event event;
-    while (mWindow.pollEvent(event)) {
+    while (window.pollEvent(event)) {
         mCurrentState->processInput(event);
     }
 }
@@ -80,12 +80,12 @@ void Game::update(sf::Time elapsedTime)
 
 void Game::render()
 {
-    mWindow.clear();
-    mWindow.draw(*mCurrentState);
+    window.clear();
+    window.draw(*mCurrentState);
     mCurrentState->drawGui();
-    mWindow.setView(mWindow.getDefaultView());
-    mWindow.draw(mStatisticsText);
-    mWindow.display();
+    window.setView(window.getDefaultView());
+    window.draw(mStatisticsText);
+    window.display();
 }
 
 void Game::updateStatistics(sf::Time elapsedTime)
@@ -100,7 +100,7 @@ void Game::updateStatistics(sf::Time elapsedTime)
             std::to_string(
                 mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) +
             "us\n" + "Koordinaten = "s +
-            toString(sf::Mouse::getPosition(mWindow)));
+            toString(sf::Mouse::getPosition(window)));
 
         mStatisticsUpdateTime -= sf::seconds(0.1f);
         mStatisticsNumFrames = 0;
@@ -112,14 +112,4 @@ void Game::load() {}
 void Game::changeGameState(GameState::EState gameState)
 {
     mCurrentState = mGameStates[static_cast<std::size_t>(gameState)];
-}
-
-sf::RenderWindow& Game::getWindow()
-{
-    return mWindow;
-}
-
-QuestionPackageManager Game::getQPM()
-{
-    return mQuestionPackageManager;
 }

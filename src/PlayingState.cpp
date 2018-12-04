@@ -1,12 +1,12 @@
 #include "PlayingState.hpp"
 #include <iostream>
 
-PlayingState::PlayingState(Game* game) : GameState(game), gui(game->getWindow())
+PlayingState::PlayingState(Game* game) : GameState(game), gui(game->window)
 {
     tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
-    const auto width  = game->getWindow().getSize().x;
-    const auto height = game->getWindow().getSize().y;
+    const auto width  = game->window.getSize().x;
+    const auto height = game->window.getSize().y;
 
     if (!texture.loadFromFile(
             (game->rootPath / "Assets" / "Map_Bereinigt.png").string())) {
