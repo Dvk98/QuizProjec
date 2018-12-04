@@ -1,17 +1,20 @@
 #pragma once
-#include "QuestionPackage.hpp"
+
 #include <vector>
+#include "QuestionPackage.hpp"
+
+class Game;
 
 class QuestionPackageManager
 {
 public:
-    QuestionPackageManager();
+    explicit QuestionPackageManager(Game*game);
 
-    void load(const std::filesystem::path& rootPath);
+    void load();
 
+    Game* const pGame;
 	std::vector<QuestionPackage> getQPs();
 
 private:
-	std::vector<QuestionPackage> mQuestionPackages;
-
+    std::vector<QuestionPackage> mQuestionPackages;
 };

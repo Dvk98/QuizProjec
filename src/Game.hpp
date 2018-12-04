@@ -13,7 +13,6 @@ class Game : private sf::NonCopyable
 public:
     explicit Game(const std::filesystem::path& rootPath);
 
-
     void run();
 
     void changeGameState(GameState::EState gameState);
@@ -37,7 +36,9 @@ private:
 
     GameState* mCurrentState{nullptr};
 
-    std::array<std::unique_ptr<GameState>, static_cast<std::size_t>(GameState::EState::Count)>
+    std::array<
+        std::unique_ptr<GameState>,
+        static_cast<std::size_t>(GameState::EState::Count)>
         mGameStates;
 
     sf::Font    mFont;

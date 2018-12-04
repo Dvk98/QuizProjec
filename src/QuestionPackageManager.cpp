@@ -3,15 +3,16 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Game.hpp"
 
 namespace fs = std::filesystem;
 
-QuestionPackageManager::QuestionPackageManager() {}
+QuestionPackageManager::QuestionPackageManager(Game* game) : pGame(game) {}
 
-void QuestionPackageManager::load(const std::filesystem::path& rootPath)
+void QuestionPackageManager::load()
 {
     for (const auto& p :
-         fs::directory_iterator(rootPath / "Assets" / "Questions")) {
+         fs::directory_iterator(pGame->rootPath / "Assets" / "Questions")) {
         mQuestionPackages.emplace_back(p.path().string())
             .load(p.path().string());
     }

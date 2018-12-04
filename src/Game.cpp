@@ -15,6 +15,7 @@ const sf::Time Game::sTimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game(const std::filesystem::path& rootPath)
     : rootPath(rootPath)
+    , questionPackageManager(this)
     , window(sf::VideoMode(800, 600), "World", sf::Style::Close)
     , mFont()
     , mStatisticsText()
@@ -26,7 +27,7 @@ Game::Game(const std::filesystem::path& rootPath)
     mStatisticsText.setPosition(5.f, 5.f);
     mStatisticsText.setCharacterSize(10);
 
-    questionPackageManager.load(rootPath);
+    questionPackageManager.load();
 
     mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
         std::make_unique<MenuState>(this);
@@ -43,12 +44,13 @@ void Game::run()
     sf::Clock clock;
     sf::Time  timeSinceLastUpdate = sf::Time::Zero;
     load();
+
     while (window.isOpen()) {
         sf::Time elapsedTime = clock.restart();
         timeSinceLastUpdate += elapsedTime;
+
         while (timeSinceLastUpdate > sTimePerFrame) {
             timeSinceLastUpdate -= sTimePerFrame;
-
             processEvents();
             update(sTimePerFrame);
         }
@@ -60,8 +62,7 @@ void Game::run()
 
 void Game::processEvents()
 {
-    sf::Event event;
-    while (window.pollEvent(event)) {
+    for (sf::Event event; window.pollEvent(event);) {
         mCurrentState->processInput(event);
     }
 }
