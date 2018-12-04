@@ -2,7 +2,4 @@
 
 #include <iostream>
 
-GameState::GameState(Game* game)
-:pGame(game)
-{
-}
+GameState::GameState(Game* game) : pGame(game) {}
