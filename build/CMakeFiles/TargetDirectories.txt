@@ -1,0 +1,3 @@
+G:/Daten/Dokumente/Git/QuizProjec/build/CMakeFiles/ALL_BUILD.dir
+G:/Daten/Dokumente/Git/QuizProjec/build/CMakeFiles/ZERO_CHECK.dir
+G:/Daten/Dokumente/Git/QuizProjec/build/src/CMakeFiles/QuizProject.dir

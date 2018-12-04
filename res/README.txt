@@ -1,0 +1,1 @@
+Assets nach Aenderung nach build/src/Debug (oder wo die exe halt is) kopieren!!!

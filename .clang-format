@@ -1,0 +1,49 @@
+---
+Language:        Cpp
+BasedOnStyle:  Chromium
+
+ColumnLimit:     80
+IndentPPDirectives: AfterHash
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+ AfterClass:      true
+ AfterControlStatement: false
+ AfterEnum:       true
+ AfterFunction:   true
+ AfterNamespace:  false
+ AfterObjCDeclaration: false
+ AfterStruct:     true
+ AfterUnion:      true
+ BeforeCatch:     true
+ BeforeElse:      true
+ IndentBraces:    false
+ SplitEmptyFunction: true
+ SplitEmptyRecord: true
+ SplitEmptyNamespace: true
+
+#MaxEmptyLinesToKeep: 2
+AccessModifierOffset: -4
+
+AllowAllParametersOfDeclarationOnNextLine: false
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+
+IndentWidth:     4
+ContinuationIndentWidth: 4
+
+PointerAlignment: Left
+
+BreakConstructorInitializersBeforeComma: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+SortIncludes: true
+SortUsingDeclarations: true
+
+
+BinPackArguments: true
+SpaceAfterTemplateKeyword: false
+SpacesInSquareBrackets: false
+
+BreakStringLiterals: false

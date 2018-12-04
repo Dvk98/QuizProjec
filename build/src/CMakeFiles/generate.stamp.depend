@@ -1,0 +1,11 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/SFML/lib/cmake/SFML/SFMLConfig.cmake
+C:/Program Files/SFML/lib/cmake/SFML/SFMLConfigDependencies.cmake
+C:/Program Files/SFML/lib/cmake/SFML/SFMLConfigVersion.cmake
+C:/Program Files/SFML/lib/cmake/SFML/SFMLSharedTargets-debug.cmake
+C:/Program Files/SFML/lib/cmake/SFML/SFMLSharedTargets.cmake
+C:/Program Files/TGUI/lib/cmake/TGUI/TGUIConfig.cmake
+C:/Program Files/TGUI/lib/cmake/TGUI/TGUIConfigVersion.cmake
+C:/Program Files/TGUI/lib/cmake/TGUI/TGUISharedTargets-debug.cmake
+C:/Program Files/TGUI/lib/cmake/TGUI/TGUISharedTargets.cmake
+G:/Daten/Dokumente/Git/QuizProjec/src/CMakeLists.txt
