@@ -29,20 +29,13 @@ Game::Game(const std::filesystem::path& rootPath)
     questionPackageManager.load(rootPath);
 
     mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
-        new MenuState(this);
+        std::make_unique<MenuState>(this);
     mGameStates[static_cast<std::size_t>(GameState::EState::Lobby)] =
-        new LobbyState(this);
+        std::make_unique<LobbyState>(this);
     mGameStates[static_cast<std::size_t>(GameState::EState::Playing)] =
-        new PlayingState(this);
+        std::make_unique<PlayingState>(this);
 
     changeGameState(GameState::EState::Menu);
-}
-
-Game::~Game()
-{
-    for (GameState* gameState : mGameStates) {
-        delete gameState;
-    }
 }
 
 void Game::run()
@@ -111,5 +104,5 @@ void Game::load() {}
 
 void Game::changeGameState(GameState::EState gameState)
 {
-    mCurrentState = mGameStates[static_cast<std::size_t>(gameState)];
+    mCurrentState = mGameStates[static_cast<std::size_t>(gameState)].get();
 }

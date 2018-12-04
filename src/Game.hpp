@@ -13,7 +13,6 @@ class Game : private sf::NonCopyable
 public:
     explicit Game(const std::filesystem::path& rootPath);
 
-    ~Game();
 
     void run();
 
@@ -38,7 +37,7 @@ private:
 
     GameState* mCurrentState{nullptr};
 
-    std::array<GameState*, static_cast<std::size_t>(GameState::EState::Count)>
+    std::array<std::unique_ptr<GameState>, static_cast<std::size_t>(GameState::EState::Count)>
         mGameStates;
 
     sf::Font    mFont;
