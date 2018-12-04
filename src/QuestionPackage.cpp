@@ -6,7 +6,7 @@
 
 using json = nlohmann::json;
 
-QuestionPackage::QuestionPackage(std::string name) : isActive(0), name(name) {}
+QuestionPackage::QuestionPackage(const std::string& mName) : mName(mName) {}
 
 void QuestionPackage::load(std::string path)
 {
@@ -14,40 +14,30 @@ void QuestionPackage::load(std::string path)
     json          j;
     i >> j;
 
-    for (auto cat : j) {
-        std::string questionText = cat["Question"];
-        std::string answerText   = cat["Answer"];
-        std::string latitude     = cat["Latitude"];
-        std::string longitude    = cat["Longitude"];
-
-        Question question(
-            questionText, answerText, std::stof(latitude),
-            std::stof(longitude));
-        mQuestions.emplace_back(question);
+    for (const auto& cat : j) {
+        mQuestions.emplace_back(
+            cat["Question"], cat["Answer"],
+            std::stof(std::string{cat["Latitude"]}),
+            std::stof(std::string{cat["Longitude"]}));
     }
 }
 
-void QuestionPackage::setActive()
+void QuestionPackage::setActive(bool isActive)
 {
-    isActive = 1;
+    mIsActive = isActive;
 }
 
-void QuestionPackage::setInactive()
+bool QuestionPackage::isActive() const
 {
-    isActive = 0;
+    return mIsActive;
 }
 
-bool QuestionPackage::getState()
+const std::string& QuestionPackage::getName() const
 {
-    return isActive;
+    return mName;
 }
 
-std::string QuestionPackage::getName()
+const std::string& QuestionPackage::getDescription() const
 {
-    return name;
-}
-
-std::string QuestionPackage::getDescription()
-{
-    return description;
+    return mDescription;
 }

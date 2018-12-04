@@ -1,22 +1,24 @@
 #pragma once
 #pragma once
-#include "GameState.hpp"
-#include "GameMap.hpp"
 #include "Game.hpp"
+#include "GameMap.hpp"
+#include "GameState.hpp"
 
 class PlayingState : public GameState
 {
 public:
-	PlayingState(Game* game);
+    explicit PlayingState(Game* game);
 
-	void processInput(sf::Event event);
-	void update(sf::Time delta);
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
-	void drawGui();
+    void processInput(const sf::Event& event) final;
+
+    void update(sf::Time delta) final;
+
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
+
+    void drawGui();
 
 private:
-	tgui::Gui gui;
-	GameMap mMap;
-	sf::Texture texture;
-
+    tgui::Gui   gui;
+    GameMap     mMap;
+    sf::Texture texture;
 };

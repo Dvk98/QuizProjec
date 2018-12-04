@@ -7,31 +7,32 @@ class Game;
 class GameState : public sf::Drawable
 {
 public:
-	
-	enum class EState
-	{
-		Title,
-		Menu,
-		Options,
-		Lobby,
-		Playing,
-		Result,
-		Count
-	};
-	
-	GameState(Game* game);
-		
-	virtual void processInput(sf::Event event)=0;
-	virtual void update(sf::Time delta)=0;
-	virtual void drawGui() = 0;
+    enum class EState
+    {
+        Title,
+        Menu,
+        Options,
+        Lobby,
+        Playing,
+        Result,
+        Count
+    };
+
+    explicit GameState(Game* game);
+
+    virtual void processInput(const sf::Event& event) = 0;
+
+    virtual void update(sf::Time delta) = 0;
+
+    virtual void drawGui() = 0;
 
 public:
-	const Game* pGame;
+    const Game* pGame;
 };
 
-template <typename T>
+template<typename T>
 void centerOrigin(T& drawable)
 {
-	sf::FloatRect bound = drawable.getLocalBounds();
-	drawable.setOrigin(bound.width / 2, bound.height / 2);
+    const sf::FloatRect bounds{drawable.getLocalBounds()};
+    drawable.setOrigin(bounds.width / 2, bounds.height / 2);
 }

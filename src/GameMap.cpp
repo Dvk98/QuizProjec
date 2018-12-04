@@ -2,13 +2,6 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 
-GameMap::GameMap() {}
-
-void GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(mSprite);
-}
-
 void GameMap::setTexture(sf::Texture& texture)
 {
     mSprite.setTexture(texture);
@@ -32,8 +25,13 @@ void GameMap::setPosition(float x, float y)
     mSprite.setPosition(x, y);
 }
 
-sf::Vector2f GameMap::getSize()
+sf::Vector2f GameMap::getSize() const
 {
     return sf::Vector2f(
         mSprite.getGlobalBounds().width, mSprite.getGlobalBounds().height);
+}
+
+void GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(mSprite);
 }

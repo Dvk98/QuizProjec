@@ -8,12 +8,12 @@ class Game;
 class QuestionPackageManager
 {
 public:
-    explicit QuestionPackageManager(Game*game);
+    explicit QuestionPackageManager(Game* game);
 
     void load();
 
-    Game* const pGame;
-	std::vector<QuestionPackage> getQPs();
+    Game* const                  pGame;
+    std::vector<QuestionPackage> getQPs() const;
 
 private:
     std::vector<QuestionPackage> mQuestionPackages;

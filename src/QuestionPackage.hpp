@@ -1,27 +1,28 @@
 #pragma once
 
-#include <vector>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Question.hpp"
 
-class QuestionPackage {
+class QuestionPackage
+{
+public:
+    explicit QuestionPackage(const std::string& mName);
+
+    void load(std::string path);
+
+    void setActive(bool isActive);
+
+    bool isActive() const;
+
+    const std::string& getName() const;
+
+    const std::string& getDescription() const;
 
 public:
-	QuestionPackage(std::string name);
-	void load(std::string path);
-	void setActive();
-	void setInactive();
-	bool getState();
-
-	std::string getName();
-	std::string getDescription();
-
-public:
-	std::vector<Question> mQuestions;
-
-private:
-	std::string name;
-	std::string description;
-	bool isActive;
+    std::vector<Question> mQuestions;
+    std::string           mName;
+    std::string           mDescription;
+    bool                  mIsActive{false};
 };

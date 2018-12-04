@@ -52,14 +52,14 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
     bottomLayout->add(bBack, "Back");
 }
 
+void LobbyState::processInput(const sf::Event& event)
+{
+    gui.handleEvent(event);
+}
+
 void LobbyState::drawGui()
 {
     gui.draw();
-}
-
-void LobbyState::processInput(sf::Event event)
-{
-    gui.handleEvent(event);
 }
 
 void LobbyState::draw(sf::RenderTarget& target, sf::RenderStates states) const

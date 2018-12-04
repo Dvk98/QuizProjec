@@ -2,25 +2,25 @@
 #
 
 Question::Question(
-    std::string question,
-    std::string answer,
-    float       lat,
-    float       lon)
+    const std::string& question,
+    const std::string& answer,
+    float              lat,
+    float              lon)
     : mQuestion(question), mAnswer(answer), mLat(lat), mLon(lon)
 {
 }
 
-std::string Question::getAnswer()
+const std::string& Question::getAnswer() const
 {
     return mAnswer;
 }
 
-sf::Vector2f Question::getDestination()
+sf::Vector2f Question::getDestination() const
 {
     return sf::Vector2f(mLat, mLon);
 }
 
-std::string Question::getQuestion()
+std::string Question::getQuestion() const
 {
     return mQuestion;
 }

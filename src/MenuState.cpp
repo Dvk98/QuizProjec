@@ -34,14 +34,14 @@ MenuState::MenuState(Game* game) : GameState(game), gui(game->window)
     layout->add(bExit);
 }
 
-void MenuState::processInput(sf::Event event)
-{
-    gui.handleEvent(event);
-}
-
 void MenuState::drawGui()
 {
     gui.draw();
+}
+
+void MenuState::processInput(const sf::Event& event)
+{
+    gui.handleEvent(event);
 }
 
 void MenuState::update(sf::Time delta) {}

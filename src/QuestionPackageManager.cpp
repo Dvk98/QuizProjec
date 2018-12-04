@@ -18,7 +18,7 @@ void QuestionPackageManager::load()
     }
 }
 
-std::vector<QuestionPackage> QuestionPackageManager::getQPs()
+std::vector<QuestionPackage> QuestionPackageManager::getQPs() const
 {
     return mQuestionPackages;
 }

@@ -17,7 +17,7 @@ PlayingState::PlayingState(Game* game) : GameState(game), gui(game->window)
     // mGameMap.setScale(0.25f, 0.25f);
 }
 
-void PlayingState::processInput(sf::Event event)
+void PlayingState::processInput(const sf::Event& event)
 {
     gui.handleEvent(event);
 }
