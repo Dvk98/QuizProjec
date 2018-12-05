@@ -6,15 +6,16 @@
 
 using json = nlohmann::json;
 
-QuestionPackage::QuestionPackage(const std::string& mName) : mName(mName) {}
-
-void QuestionPackage::load(std::string path)
+QuestionPackage::QuestionPackage(const std::filesystem::path& path)
 {
     std::ifstream i(path);
     json          j;
     i >> j;
 
-    for (const auto& cat : j) {
+    mName = j["Name"];
+    mAuthor = j["Author"];
+
+    for (const auto& cat : j["Questions"]) {
         mQuestions.emplace_back(
             cat["Question"], cat["Answer"],
             std::stof(std::string{cat["Latitude"]}),

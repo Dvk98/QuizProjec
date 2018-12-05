@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -8,9 +9,7 @@
 class QuestionPackage
 {
 public:
-    explicit QuestionPackage(const std::string& mName);
-
-    void load(std::string path);
+    explicit QuestionPackage(const std::filesystem::path& path);
 
     void setActive(bool isActive);
 
@@ -22,6 +21,7 @@ public:
 
 public:
     std::vector<Question> mQuestions;
+    std::string           mAuthor;
     std::string           mName;
     std::string           mDescription;
     bool                  mIsActive{false};

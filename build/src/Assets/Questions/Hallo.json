@@ -1,0 +1,31 @@
+﻿{
+	"Name": "fwajfhwakf",
+	"Author": "Jan Hohlgnauss",
+	"Description": "Das ist ein fiktive Test Paket",
+	"Questions": [
+		{
+			"Question": "ExampleQuestion1",
+			"Answer": "ExampleAnswer1",
+			"Latitude": "54",
+			"Longitude": "30"
+		},
+		{
+			"Question": "ExampleQuestion2",
+			"Answer": "ExampleAnswer2",
+			"Latitude": "78",
+			"Longitude": "21"
+		},
+		{
+			"Question": "ExampleQuestion3",
+			"Answer": "ExampleAnswer3",
+			"Latitude": "33",
+			"Longitude": "44"
+		},
+		{
+			"Question": "ExampleQuestion4",
+			"Answer": "ExampleAnswer4",
+			"Latitude": "87",
+			"Longitude": "11"
+		}
+	]
+}

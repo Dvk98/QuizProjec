@@ -13,8 +13,9 @@ void QuestionPackageManager::load()
 {
     for (const auto& p :
          fs::directory_iterator(pGame->rootPath / "Assets" / "Questions")) {
-        mQuestionPackages.emplace_back(p.path().string())
-            .load(p.path().string());
+        if (p.path().extension() == ".json") {
+            mQuestionPackages.emplace_back(p.path());
+        }
     }
 }
 
