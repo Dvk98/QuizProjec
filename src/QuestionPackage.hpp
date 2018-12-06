@@ -15,7 +15,7 @@ public:
 
     bool isActive() const;
 
-    const std::string& getName() const;
+    const std::string& name() const;
 
     const std::string& getDescription() const;
 

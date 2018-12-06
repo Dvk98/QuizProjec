@@ -7,14 +7,17 @@ class Game;
 
 class QuestionPackageManager
 {
+    using CollectionType = std::vector<QuestionPackage>;
+
 public:
     explicit QuestionPackageManager(Game* game);
 
     void load();
 
-    Game* const                  pGame;
-    std::vector<QuestionPackage> getQPs() const;
+    const CollectionType& getQPs() const;
+
+    Game* const pGame;
 
 private:
-    std::vector<QuestionPackage> mQuestionPackages;
+    CollectionType mQuestionPackages;
 };

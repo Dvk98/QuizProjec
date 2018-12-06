@@ -33,7 +33,7 @@ bool QuestionPackage::isActive() const
     return mIsActive;
 }
 
-const std::string& QuestionPackage::getName() const
+const std::string& QuestionPackage::name() const
 {
     return mName;
 }

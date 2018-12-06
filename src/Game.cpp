@@ -29,14 +29,14 @@ Game::Game(const std::filesystem::path& rootPath)
 
     questionPackageManager.load();
 
-    mGameStates[static_cast<std::size_t>(GameState::EState::Menu)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::MENU)] =
         std::make_unique<MenuState>(this);
-    mGameStates[static_cast<std::size_t>(GameState::EState::Lobby)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::LOBBY)] =
         std::make_unique<LobbyState>(this);
-    mGameStates[static_cast<std::size_t>(GameState::EState::Playing)] =
+    mGameStates[static_cast<std::size_t>(GameState::EState::PLAYING)] =
         std::make_unique<PlayingState>(this);
 
-    changeGameState(GameState::EState::Menu);
+    changeGameState(GameState::EState::MENU);
 }
 
 void Game::run()
@@ -58,6 +58,11 @@ void Game::run()
         updateStatistics(elapsedTime);
         render();
     }
+}
+
+void Game::quit()
+{
+    window.close();
 }
 
 void Game::processEvents()

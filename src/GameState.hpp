@@ -9,13 +9,13 @@ class GameState : public sf::Drawable
 public:
     enum class EState
     {
-        Title,
-        Menu,
-        Options,
-        Lobby,
-        Playing,
-        Result,
-        Count
+        TITLE,
+        MENU,
+        OPTIONS,
+        LOBBY,
+        PLAYING,
+        RESULT,
+        COUNT
     };
 
     explicit GameState(Game* game);
@@ -26,13 +26,12 @@ public:
 
     virtual void drawGui() = 0;
 
-public:
     const Game* pGame;
 };
 
 template<typename T>
 void centerOrigin(T& drawable)
 {
-    const sf::FloatRect bounds{drawable.getLocalBounds()};
-    drawable.setOrigin(bounds.width / 2, bounds.height / 2);
+    const auto bounds{drawable.getLocalBounds()};
+    drawable.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 }

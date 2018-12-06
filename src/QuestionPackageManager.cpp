@@ -19,7 +19,8 @@ void QuestionPackageManager::load()
     }
 }
 
-std::vector<QuestionPackage> QuestionPackageManager::getQPs() const
+const QuestionPackageManager::CollectionType& QuestionPackageManager::getQPs()
+    const
 {
     return mQuestionPackages;
 }

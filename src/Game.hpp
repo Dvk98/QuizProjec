@@ -15,6 +15,8 @@ public:
 
     void run();
 
+    void quit();
+
     void changeGameState(GameState::EState gameState);
 
     const std::filesystem::path rootPath;
@@ -38,7 +40,7 @@ private:
 
     std::array<
         std::unique_ptr<GameState>,
-        static_cast<std::size_t>(GameState::EState::Count)>
+        static_cast<std::size_t>(GameState::EState::COUNT)>
         mGameStates;
 
     sf::Font    mFont;
