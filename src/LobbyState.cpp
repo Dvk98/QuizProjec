@@ -12,12 +12,14 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
     gui.add(panel, "PackageSelectPanel");
 
     int position{0};
-    for (const auto& qp : game->questionPackageManager.getQPs()) {
+    for (auto& qp : game->questionPackageManager.mQuestionPackages) {
         auto checkbox{tgui::CheckBox::create()};
         checkbox->setRenderer(theme.getRenderer("Checkbox"));
         checkbox->setText(qp.name());
         checkbox->setSize("20%", "10%");
         checkbox->setPosition(0, std::to_string(position) + "%");
+        //checkbox->connect("checked", [&]() {qp.setActive(true)});
+        //checkbox->connect("unchecked", [&]() {qp.setActive(false)});
         panel->add(checkbox, qp.name());
         position += 12;
     }
@@ -64,3 +66,5 @@ void LobbyState::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 void LobbyState::update(sf::Time delta) {}
+
+void LobbyState::load() {}

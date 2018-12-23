@@ -49,3 +49,5 @@ void MenuState::processInput(const sf::Event& event)
 void MenuState::update(sf::Time delta) {}
 
 void MenuState::draw(sf::RenderTarget& target, sf::RenderStates states) const {}
+
+void MenuState::load() {}

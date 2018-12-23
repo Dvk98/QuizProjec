@@ -15,6 +15,8 @@ public:
 
     void drawGui();
 
+    void load();
+
 private:
     tgui::Gui gui;
 };

@@ -14,10 +14,9 @@ public:
 
     void load();
 
-    const CollectionType& getQPs() const;
+    CollectionType mQuestionPackages;
 
     Game* const pGame;
 
 private:
-    CollectionType mQuestionPackages;
 };

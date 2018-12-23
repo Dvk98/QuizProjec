@@ -26,6 +26,8 @@ public:
 
     virtual void drawGui() = 0;
 
+    virtual void load() = 0;
+
     const Game* pGame;
 };
 

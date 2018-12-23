@@ -111,4 +111,5 @@ void Game::load() {}
 void Game::changeGameState(GameState::EState gameState)
 {
     mCurrentState = mGameStates[static_cast<std::size_t>(gameState)].get();
+    mCurrentState->load();
 }

@@ -18,9 +18,3 @@ void QuestionPackageManager::load()
         }
     }
 }
-
-const QuestionPackageManager::CollectionType& QuestionPackageManager::getQPs()
-    const
-{
-    return mQuestionPackages;
-}
