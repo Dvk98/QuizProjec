@@ -1,9 +1,9 @@
 #pragma once
+#include <vector>
 #include "Game.hpp"
 #include "GameMap.hpp"
 #include "GameState.hpp"
 #include "QuestionPackageManager.hpp"
-#include <vector>
 
 class PlayingState : public GameState
 {
@@ -21,10 +21,9 @@ public:
     void load();
 
 private:
-    tgui::Gui   gui;
-    GameMap     mMap;
-    sf::Texture texture;
-    //QuestionPackageManager& qpm;
-    std::vector<QuestionPackage*> activeQuestionPackages;
-    std::vector<Question> gameQuestions;
+    tgui::Gui mGui;
+    GameMap mMap;
+    sf::Texture mTexture;
+    std::vector<QuestionPackage*> mActiveQuestionPackages;
+    std::vector<Question> mGameQuestions;
 };

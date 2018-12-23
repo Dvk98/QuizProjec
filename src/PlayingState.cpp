@@ -1,18 +1,19 @@
 #include "PlayingState.hpp"
 #include <iostream>
 
-PlayingState::PlayingState(Game* game) : GameState(game), gui(game->window) //qpm(game->questionPackageManager)
+PlayingState::PlayingState(Game* game)
+    : GameState(game), mGui(game->window)  // qpm(game->questionPackageManager)
 {
     tgui::Theme theme{(game->rootPath / "Assets" / "Black.txt").string()};
 
-    const auto width  = game->window.getSize().x;
+    const auto width = game->window.getSize().x;
     const auto height = game->window.getSize().y;
 
-    if (!texture.loadFromFile(
+    if (!mTexture.loadFromFile(
             (game->rootPath / "Assets" / "Map_Bereinigt.png").string())) {
         std::cout << "Failed to Load map.png";
     }
-    mMap.setTexture(texture);
+    mMap.setTexture(mTexture);
     mMap.setPosition(width / 2, height / 2 * 0.9f);
 
     const auto mMapSize = mMap.getSize();
@@ -22,39 +23,34 @@ PlayingState::PlayingState(Game* game) : GameState(game), gui(game->window) //qp
 
     mMap.setScale(xScale, yScale);
 
-    for(const auto& questionPackage : game->questionPackageManager.mQuestionPackages)
-    {
-        if(questionPackage.isActive())
-        {
-            activeQuestionPackages.emplace_back(questionPackage);
+    for (auto& questionPackage :
+         game->questionPackageManager.questionPackages) {
+        if (questionPackage.isActive()) {
+            mActiveQuestionPackages.emplace_back(&questionPackage);
         }
     }
-
 }
 
 void PlayingState::processInput(const sf::Event& event)
 {
-    gui.handleEvent(event);
+    mGui.handleEvent(event);
 }
 
 void PlayingState::drawGui()
 {
-    gui.draw();
+    mGui.draw();
 }
 
 void PlayingState::update(sf::Time delta)
 {
     sf::Time startingTimer = sf::seconds(0.0f);
 
-    if(startingTimer < sf::seconds(5.0f))
-    {
+    if (startingTimer < sf::seconds(5.0f)) {
         startingTimer += delta;
     }
-    else
-    {
-        //TODO Game Playing
+    else {
+        // TODO Game Playing
     }
-
 }
 
 void PlayingState::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -64,7 +60,7 @@ void PlayingState::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void PlayingState::load()
 {
-    //activeQuestionPackages
+    // activeQuestionPackages
     /*for(const auto& questionPackage : qpm.mQuestionPackages)
     {
         if(questionPackage.isActive())
@@ -72,5 +68,4 @@ void PlayingState::load()
             activeQuestionPackages.emplace_back(questionPackage);
         }
     }*/
-
 }

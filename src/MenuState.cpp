@@ -1,5 +1,6 @@
 #include "MenuState.hpp"
 
+#include "LobbyState.hpp"
 #include "SFML/Network.hpp"
 
 MenuState::MenuState(Game* game) : GameState(game), gui(game->window)
@@ -17,8 +18,9 @@ MenuState::MenuState(Game* game) : GameState(game), gui(game->window)
     auto bMultiplayer{tgui::Button::create()};
     bMultiplayer->setRenderer(theme.getRenderer("Button"));
     bMultiplayer->setText("Multiplayer");
-    bMultiplayer->connect(
-        "pressed", [=]() { game->changeGameState(GameState::EState::LOBBY); });
+    bMultiplayer->connect("pressed", [=]() {
+        game->changeGameState(std::make_unique<LobbyState>(pGame));
+    });
     layout->add(bMultiplayer);
 
     layout->addSpace(0.3f);

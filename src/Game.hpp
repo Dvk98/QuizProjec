@@ -17,11 +17,11 @@ public:
 
     void quit();
 
-    void changeGameState(GameState::EState gameState);
+    void changeGameState(std::unique_ptr<GameState> state);
 
     const std::filesystem::path rootPath;
-    QuestionPackageManager      questionPackageManager;
-    sf::RenderWindow            window;
+    QuestionPackageManager questionPackageManager;
+    sf::RenderWindow window;
 
 private:
     void processEvents();
@@ -36,15 +36,9 @@ private:
 
     static const sf::Time sTimePerFrame;
 
-    GameState* mCurrentState{nullptr};
-
-    std::array<
-        std::unique_ptr<GameState>,
-        static_cast<std::size_t>(GameState::EState::COUNT)>
-        mGameStates;
-
-    sf::Font    mFont;
-    sf::Text    mStatisticsText;
-    sf::Time    mStatisticsUpdateTime;
+    std::unique_ptr<GameState> mCurrentState;
+    sf::Font mFont;
+    sf::Text mStatisticsText;
+    sf::Time mStatisticsUpdateTime;
     std::size_t mStatisticsNumFrames;
 };

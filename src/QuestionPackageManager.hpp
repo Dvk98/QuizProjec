@@ -14,7 +14,7 @@ public:
 
     void load();
 
-    CollectionType mQuestionPackages;
+    CollectionType questionPackages;
 
     Game* const pGame;
 

@@ -1,5 +1,8 @@
 #include "LobbyState.hpp"
+
 #include <iostream>
+#include "MenuState.hpp"
+#include "PlayingState.hpp"
 
 LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
 {
@@ -12,14 +15,14 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
     gui.add(panel, "PackageSelectPanel");
 
     int position{0};
-    for (auto& qp : game->questionPackageManager.mQuestionPackages) {
+    for (auto& qp : game->questionPackageManager.questionPackages) {
         auto checkbox{tgui::CheckBox::create()};
         checkbox->setRenderer(theme.getRenderer("Checkbox"));
         checkbox->setText(qp.name());
         checkbox->setSize("20%", "10%");
         checkbox->setPosition(0, std::to_string(position) + "%");
-        //checkbox->connect("checked", [&]() {qp.setActive(true)});
-        //checkbox->connect("unchecked", [&]() {qp.setActive(false)});
+        // checkbox->connect("checked", [&]() {qp.setActive(true)});
+        // checkbox->connect("unchecked", [&]() {qp.setActive(false)});
         panel->add(checkbox, qp.name());
         position += 12;
     }
@@ -33,7 +36,7 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
     bStart->setRenderer(theme.getRenderer("Button"));
     bStart->setText("Start");
     bStart->connect("pressed", [=]() {
-        game->changeGameState(GameState::EState::PLAYING);
+        game->changeGameState(std::make_unique<PlayingState>(pGame));
     });
     bottomLayout->add(bStart, "Start");
 
@@ -46,8 +49,9 @@ LobbyState::LobbyState(Game* game) : GameState(game), gui(game->window)
     auto bBack{tgui::Button::create()};
     bBack->setRenderer(theme.getRenderer("Button"));
     bBack->setText("Back");
-    bBack->connect(
-        "pressed", [=]() { game->changeGameState(GameState::EState::MENU); });
+    bBack->connect("pressed", [=]() {
+        game->changeGameState(std::make_unique<MenuState>(pGame));
+    });
     bottomLayout->add(bBack, "Back");
 }
 

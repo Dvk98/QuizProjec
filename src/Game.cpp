@@ -29,20 +29,13 @@ Game::Game(const std::filesystem::path& rootPath)
 
     questionPackageManager.load();
 
-    mGameStates[static_cast<std::size_t>(GameState::EState::MENU)] =
-        std::make_unique<MenuState>(this);
-    mGameStates[static_cast<std::size_t>(GameState::EState::LOBBY)] =
-        std::make_unique<LobbyState>(this);
-    mGameStates[static_cast<std::size_t>(GameState::EState::PLAYING)] =
-        std::make_unique<PlayingState>(this);
-
-    changeGameState(GameState::EState::MENU);
+    changeGameState(std::make_unique<MenuState>(this));
 }
 
 void Game::run()
 {
     sf::Clock clock;
-    sf::Time  timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
     load();
 
     while (window.isOpen()) {
@@ -108,8 +101,9 @@ void Game::updateStatistics(sf::Time elapsedTime)
 
 void Game::load() {}
 
-void Game::changeGameState(GameState::EState gameState)
+void Game::changeGameState(std::unique_ptr<GameState> state)
 {
-    mCurrentState = mGameStates[static_cast<std::size_t>(gameState)].get();
+    assert(state != nullptr);
+    mCurrentState = std::move(state);
     mCurrentState->load();
 }

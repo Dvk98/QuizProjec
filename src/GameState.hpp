@@ -7,6 +7,7 @@ class Game;
 class GameState : public sf::Drawable
 {
 public:
+#if 0
     enum class EState
     {
         TITLE,
@@ -17,6 +18,7 @@ public:
         RESULT,
         COUNT
     };
+#endif
 
     explicit GameState(Game* game);
 
@@ -28,7 +30,7 @@ public:
 
     virtual void load() = 0;
 
-    const Game* pGame;
+    Game* const pGame;
 };
 
 template<typename T>
